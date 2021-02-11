@@ -1,8 +1,19 @@
-## Build Setup
-
+# How to run
+### Install dependencies
 ```bash
-# install dependencies
 $ yarn
+```
+### Run migrations
+```bash
+$ npx sequelize db:migrate
+```
 
-# serve with hot reload at localhost:3000
+### Seed database
+```bash
+$ npx sequelize-cli db:seed:all
+```
+
+### Serve with hot reload
+```bash
 $ yarn start:dev
+```
