@@ -2,21 +2,10 @@
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
-const orders = require('../api/db/models/orders');
 const basename = path.basename(__filename);
 const config =  require("../config");
 const { database } = config;
 const db = {};
-
-async function applyExtraSetup(sequelizeInstance) {
-  const { Customers, OrderItems, Orders, Pizza } = sequelizeInstance.models;
-
-Pizza.belongsTo(OrderItems);
-OrderItems.hasMany(Orders);
-Customers.belongsTo(Orders);
-
-}
-
 
 const sequelize = new Sequelize(database.name, database.username, database.password, {
   dialect: 'mysql',
@@ -39,11 +28,6 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-
-// applyExtraSetup(sequelize).then(() => console.log("hereee"));
-
-
-// sequelize.sync({ force: true }).then(() => console.log("All models were synchronized successfully."))
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -1,57 +1,59 @@
-import OrdersService from "../services/orders";
-const ordersService = new OrdersService();
+import PizzaService from "../services/pizzas";
+const pizzaService = new PizzaService();
 const headers = {
   'Content-Type': 'application/json'
 };
 
 module.exports = {
-  getAllOrders: async (req, res) => {
+  getAllPizzas: async (req, res) => {
     try {
-      const response = await ordersService.fetchAllOrders();
-      
+      const response = await pizzaService.fetchAllPizza();
+
       return {
         headers,
-        message: "orders fetch successful",
+        message: "pizza fetch successful",
         status: "success",
         statusCode: 200,
         body: response
       }
-    } catch (e) {
-      console.error(e);
+
+    } catch (error) {
       return {
         headers,
-        message: "failed to fetch all orders",
+        message: "failed to fetch all pizza",
         status: "error",
         statusCode: 400,
         body:{
           error: e.message
         }
-      }
+      }      
     }
   },
 
-  getSingleOrder: async (req, res) => {
+  savePizza: async (req, res) => {
     try {
-      const response = await ordersService.fetchSingleOrders(req.params.id);
-      
+      const { body } = req;
+      const response = await pizzaService.storePizza(body);
+
       return {
         headers,
-        message: "order fetched successfully",
+        message: "pizza saved successfully",
         status: "success",
         statusCode: 200,
         body: response
       }
+
     } catch (error) {
-      console.error(e);
       return {
         headers,
-        message: "failed to fetch all orders",
+        message: "failed to save pizza",
         status: "error",
         statusCode: 400,
         body:{
           error: e.message
         }
-      }
+      }      
     }
   }
+
 }

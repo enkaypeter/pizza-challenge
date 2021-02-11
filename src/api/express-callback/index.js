@@ -19,14 +19,14 @@ module.exports = function makeExpressCallabck (controller, callback) {
       controller(httpRequest, callback)
       .then(httpResponse => {
           if (httpResponse.headers) {
-              res.set(httpResponse.headers)
+            res.set(httpResponse.headers)
           }
           res.type('json')
           res.status(httpResponse.statusCode)
           .send({
-              message: httpResponse.message,
-              status: httpResponse.status,
-              data: httpResponse.body
+            message: httpResponse.message,
+            status: httpResponse.status,
+            data: httpResponse.body
           })
       }).catch(e => res.status(500).send({
             message: 'An unkown error occurred.',

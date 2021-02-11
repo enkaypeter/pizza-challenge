@@ -4,7 +4,7 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
 
       /**
-       * OrderItems has many Orders relationship
+       * Orders has many OrderItems relationship
        */
       return queryInterface.addColumn(
         'OrderItems',
@@ -19,9 +19,9 @@ module.exports = {
           onDelete: 'SET NULL',
         }  
       ).then(() => {
-      //   /**
-      //    * Pizza belongs to OrdersItem
-      //    */
+      /**
+       * Pizza belongs to OrdersItem
+       */
         return queryInterface.addColumn(
           'OrderItems',
           'pizzaId',
@@ -39,7 +39,7 @@ module.exports = {
   down: async (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
       'OrderItems', // name of Source model
-      'orderId' // key we want to remove
+      'orderId' // column we want to remove
     ).then(() => {
       'OrderItems',
       'pizzaId'
